@@ -18,6 +18,8 @@ class NumberTile extends StatelessWidget {
         sequenceNumber ==
         (gameState.currentExpectedNumbers[playerForNumber] ?? 1);
 
+    final screenSize = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: () {
         gameState.tapNumber(number);
@@ -25,16 +27,19 @@ class NumberTile extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: tileColor.withOpacity(0.7),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(screenSize.width * 0.02),
           border:
               isCurrentPlayerTile && isNextInSequence
-                  ? Border.all(color: Colors.yellow, width: 2)
+                  ? Border.all(
+                    color: Colors.yellow,
+                    width: screenSize.width * 0.005,
+                  )
                   : null,
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              blurRadius: 2,
-              offset: const Offset(0, 2),
+              blurRadius: screenSize.width * 0.01,
+              offset: Offset(0, screenSize.width * 0.005),
             ),
           ],
         ),
@@ -44,7 +49,7 @@ class NumberTile extends StatelessWidget {
               child: Text(
                 sequenceNumber.toString(),
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: screenSize.width * 0.05,
                   fontWeight: FontWeight.bold,
                   color:
                       tileColor.computeLuminance() > 0.5
@@ -54,15 +59,18 @@ class NumberTile extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 2,
-              right: 2,
+              top: screenSize.width * 0.005,
+              right: screenSize.width * 0.005,
               child: Container(
-                width: 12,
-                height: 12,
+                width: screenSize.width * 0.03,
+                height: screenSize.width * 0.03,
                 decoration: BoxDecoration(
                   color: tileColor,
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white, width: 1),
+                  border: Border.all(
+                    color: Colors.white,
+                    width: screenSize.width * 0.002,
+                  ),
                 ),
               ),
             ),
